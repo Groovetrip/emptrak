@@ -21,6 +21,10 @@ Route::middleware('auth')->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
 
     // Employees
-    Route::resource('employees', 'EmployeeController')->only(['index', 'show', 'create', 'store']);
+    Route::get('/employees', 'EmployeeController@index');
+    Route::get('/employees/create', 'EmployeeController@create');
+    Route::get('/employees/{employee}', 'EmployeeController@show');
+    Route::post('/employees', 'EmployeeController@store');
+
 
 });
