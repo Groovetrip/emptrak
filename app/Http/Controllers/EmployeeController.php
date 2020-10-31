@@ -6,6 +6,7 @@ use App\Models\Employee;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Http\Requests\StoreEmployee;
 
 class EmployeeController extends Controller
 {
@@ -38,9 +39,10 @@ class EmployeeController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreEmployee $request)
     {
-        //
+        $employee = Employee::create($request->all());
+        return redirect("/employees/$employee->id");
     }
 
     /**
@@ -51,7 +53,6 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        dd($employee);
         return view('employees.show', compact([
             'employee',
         ]));

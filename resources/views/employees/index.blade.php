@@ -4,7 +4,10 @@
 
     <div class="container pt-4">
 
-        <h1 class="mb-4">Employees</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+             <h1 class="m-0">Employees</h1>
+             <a href="/employees/create" role="button" class="btn btn-primary">Create</a>
+        </div>
 
         <table class="table table-striped table-hover shadow-sm">
             <thead>
@@ -13,17 +16,19 @@
                     <td>Name</td>
                     <td>Email</td>
                     <td>Phone</td>
+                    <td>Gender</td>
                     <td>Birth Date</td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($employees as $employee)
-                    <tr>
+                    <tr onclick="window.location = '/employees/{{ $employee->id }}'" class="cursor-pointer">
                         <td>{{ $employee->id }}</td>
                         <td>{{ $employee->full_name }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td>
-                        <td>{{ $employee->birth_date->format('m-d-Y') }}</td>
+                        <td>{{ ucfirst($employee->gender) }}</td>
+                        <td>{{ $employee->birth_date->format('M d Y') }}</td>
                     </tr>
                 @endforeach
             </tbody>
