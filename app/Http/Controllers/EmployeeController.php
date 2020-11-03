@@ -21,7 +21,7 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        $employees = Employee::paginate($request->get('results-per-page', Employee::RESULTS_PER_PAGE));
+        $employees = Employee::paginate($request->get('results_per_page', Employee::RESULTS_PER_PAGE));
 
         return view('employees.index', compact([
             'employees',
@@ -41,7 +41,7 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param StoreEmployee $request
      * @return RedirectResponse
      */
     public function store(StoreEmployee $request)
