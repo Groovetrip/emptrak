@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
+    public const RESULTS_PER_PAGE = 25;
+
     protected $connection = 'mysql';
     protected $table = 'employees';
 

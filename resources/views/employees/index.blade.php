@@ -33,6 +33,11 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="row pt-3 justify-content-center">
+            {{ $employees->appends(request()->input())->links() }}
+        </div>
+
     </div>
 
 @endsection
