@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -10,14 +11,18 @@ use App\Http\Requests\StoreEmployee;
 
 class EmployeeController extends Controller
 {
+    use SoftDeletes;
+
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $employees = Employee::all();
+        $employees = Employee::paginate($request->get('results-per-page', Employee::RESULTS_PER_PAGE));
+
         return view('employees.index', compact([
             'employees',
         ]));
@@ -42,6 +47,7 @@ class EmployeeController extends Controller
     public function store(StoreEmployee $request)
     {
         $employee = Employee::create($request->all());
+
         return redirect("/employees/$employee->id");
     }
 
@@ -66,7 +72,9 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('employees.edit', compact([
+            'employee'
+        ]));
     }
 
     /**
@@ -78,7 +86,9 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $employee->update($request->all());
+
+        return back();
     }
 
     /**
@@ -89,6 +99,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+
+        return back();
     }
 }
