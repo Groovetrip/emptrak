@@ -25,7 +25,7 @@ class EmployeeController extends Controller
             ->phone(request('phone'))
             ->gender(request('gender'))
             ->birthDate(request('birth_date'))
-            ->paginate(request()->get('results_per_page', Employee::RESULTS_PER_PAGE));
+            ->paginate(request('results_per_page', Employee::RESULTS_PER_PAGE));
 
         return view('employees.index', compact([
             'employees',
