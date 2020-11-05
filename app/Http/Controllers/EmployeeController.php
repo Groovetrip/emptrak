@@ -16,12 +16,16 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $employees = Employee::paginate($request->get('results_per_page', Employee::RESULTS_PER_PAGE));
+        $employees = Employee::name(request('name'))
+            ->email(request('email'))
+            ->phone(request('phone'))
+            ->gender(request('gender'))
+            ->birthDate(request('birth_date'))
+            ->paginate(request()->get('results_per_page', Employee::RESULTS_PER_PAGE));
 
         return view('employees.index', compact([
             'employees',
