@@ -1,0 +1,28 @@
+.search-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.search-row div {
+    width: 100%;
+    padding: 7px;
+}
+
+@media screen and (min-width: 992px) {
+
+    .search-row div {
+        width: 25%;
+    }
+
+    .search-row div:first-child {
+        padding-left: 0;
+    }
+
+    .search-row div:nth-child(5) {
+        padding-left: 0;
+    }
+
+    .search-row div:nth-child(4) {
+        padding-right: 0;
+    }
+}

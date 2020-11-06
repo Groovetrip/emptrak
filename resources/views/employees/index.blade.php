@@ -4,10 +4,73 @@
 
     <div class="container pt-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
              <h1 class="m-0">Employees</h1>
-             <a href="/employees/create" role="button" class="btn btn-primary">Create</a>
         </div>
+
+        <form action="/employees" method="GET">
+
+            <div class="search-row mb-2">
+                <div>
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ request('name') }}"
+                        placeholder="Name"
+                        class="form-control"
+                    />
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        name="email"
+                        value="{{ request('email') }}"
+                        placeholder="Email"
+                        class="form-control"
+                    />
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        name="phone"
+                        value="{{ request('phone') }}"
+                        placeholder="Phone"
+                        class="form-control"
+                    />
+                </div>
+                <div>
+                    <select
+                        name="gender"
+                        class="form-control"
+                    >
+                        <option value="">Gender</option>
+                        <option {{ request('gender') === 'male' ? 'selected' : '' }} value="male">Male</option>
+                        <option {{ request('gender') === 'female' ? 'selected' : '' }} value="female">Female</option>
+                        <option {{ request('gender') === 'other' ? 'selected' : '' }} value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        name="birth_date"
+                        value="{{ request('birth_date') }}"
+                        placeholder="Birth date"
+                        class="form-control"
+                    />
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between mb-4">
+                <div>
+                    <button type="submit" class="btn btn-primary mr-3">Search</button>
+                    <a href="/employees" role="button" class="btn btn-primary">Clear</a>
+                </div>
+                <div>
+                    <a href="/employees/create" role="button" class="btn btn-primary">Create</a>
+                </div>
+            </div>
+
+        </form>
 
         <table class="table table-striped table-hover shadow-sm">
             <thead>
