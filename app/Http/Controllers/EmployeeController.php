@@ -54,7 +54,8 @@ class EmployeeController extends Controller
     {
         $employee = Employee::create($request->all());
 
-        return redirect("/employees/$employee->id");
+        return redirect('/employees');
+//        return redirect("/employees/$employee->id");
     }
 
     /**

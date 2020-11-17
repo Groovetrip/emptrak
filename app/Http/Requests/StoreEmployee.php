@@ -27,6 +27,7 @@ class StoreEmployee extends FormRequest
      */
     public function rules()
     {
+        // TODO: Improve this validation! Check that rate matches classification, bank details required if paymentMethod = Direct Deposit
         return [
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
