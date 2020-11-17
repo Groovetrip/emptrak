@@ -66,7 +66,9 @@
                     <a href="/employees" role="button" class="btn btn-primary">Clear</a>
                 </div>
                 <div>
+                    @can('edit employees')
                     <a href="/employees/create" role="button" class="btn btn-primary">Create</a>
+                    @endcan
                 </div>
             </div>
 
@@ -75,7 +77,6 @@
         <table class="table table-striped table-hover shadow-sm">
             <thead>
                 <tr class="bg-primary text-white">
-                    <td>Id</td>
                     <td>Name</td>
                     <td>Email</td>
                     <td>Phone</td>
@@ -86,12 +87,11 @@
             <tbody>
                 @foreach($employees as $employee)
                     <tr onclick="window.location = '/employees/{{ $employee->id }}'" class="cursor-pointer">
-                        <td>{{ $employee->id }}</td>
                         <td>{{ $employee->full_name }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td>
                         <td>{{ ucfirst($employee->gender) }}</td>
-                        <td>{{ $employee->birth_date->format('M d Y') }}</td>
+                        <td>{{ $employee->birth_date ? $employee->birth_date->format('M d Y') : null }}</td>
                     </tr>
                 @endforeach
             </tbody>

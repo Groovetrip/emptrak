@@ -17,12 +17,25 @@ class CreateEmployeesTable extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('gender');
-            $table->date('birth_date');
-
+            $table->char('middle_initial', 1)->nullable();
+            $table->string('email')->nullable();
+            $table->string('address');
+            $table->string('address2')->nullable();
+            $table->string('city');
+            $table->string('state', 2);
+            $table->string('zip', 12);
+            $table->string('classification');
+            $table->string('payment_method');
+            $table->float('salary', 12, 2)->nullable();
+            $table->float('hourly_rate', 8, 2)->nullable();
+            $table->float('commission_rate', 8, 2)->nullable();
+            $table->string('routing_number')->nullable();
+            $table->string('account_number')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('birth_date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
