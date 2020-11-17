@@ -64,7 +64,7 @@ class StoreEmployee extends FormRequest
                 is_null(request('hourly_rate')) &&
                 is_null(request('commission_rate'))
             ) {
-                $validator->errors()->add('hourly_rate', 'Employee must have at least one ');
+                $validator->errors()->add('rate', 'Employee must have at least one ');
             }
         });
     }
