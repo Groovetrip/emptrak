@@ -30,33 +30,26 @@
                     />
                 </div>
                 <div>
-                    <input
-                        type="text"
-                        name="phone"
-                        value="{{ request('phone') }}"
-                        placeholder="Phone"
-                        class="form-control"
-                    />
-                </div>
-                <div>
                     <select
-                        name="gender"
+                        name="classification"
                         class="form-control"
                     >
-                        <option value="">Gender</option>
-                        <option {{ request('gender') === 'male' ? 'selected' : '' }} value="male">Male</option>
-                        <option {{ request('gender') === 'female' ? 'selected' : '' }} value="female">Female</option>
-                        <option {{ request('gender') === 'other' ? 'selected' : '' }} value="other">Other</option>
+                        <option value="">Classification</option>
+                        @foreach(App\Models\Employee::getClassifications() as $classification)
+                            <option value="{{ $classification }}" {{ request('classification') === $classification ? 'selected' : '' }}>{{ $classification }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div>
-                    <input
-                        type="text"
-                        name="birth_date"
-                        value="{{ request('birth_date') }}"
-                        placeholder="Birth date"
+                    <select
+                        name="payment_method"
                         class="form-control"
-                    />
+                    >
+                        <option value="">Payment Method</option>
+                        @foreach(App\Models\Employee::getPaymentMethods() as $payment_method)
+                            <option value="{{ $payment_method }}" {{ request('payment_method') === $payment_method ? 'selected' : '' }}>{{ $payment_method }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
@@ -66,7 +59,9 @@
                     <a href="/employees" role="button" class="btn btn-primary">Clear</a>
                 </div>
                 <div>
+                    @can('edit employees')
                     <a href="/employees/create" role="button" class="btn btn-primary">Create</a>
+                    @endcan
                 </div>
             </div>
 
@@ -75,23 +70,21 @@
         <table class="table table-striped table-hover shadow-sm">
             <thead>
                 <tr class="bg-primary text-white">
-                    <td>Id</td>
                     <td>Name</td>
                     <td>Email</td>
-                    <td>Phone</td>
-                    <td>Gender</td>
-                    <td>Birth Date</td>
+                    <td>Classification</td>
+                    <td>Payment Method</td>
+                    <td>Created At</td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($employees as $employee)
                     <tr onclick="window.location = '/employees/{{ $employee->id }}'" class="cursor-pointer">
-                        <td>{{ $employee->id }}</td>
                         <td>{{ $employee->full_name }}</td>
                         <td>{{ $employee->email }}</td>
-                        <td>{{ $employee->phone }}</td>
-                        <td>{{ ucfirst($employee->gender) }}</td>
-                        <td>{{ $employee->birth_date->format('M d Y') }}</td>
+                        <td>{{ $employee->classification }}</td>
+                        <td>{{ $employee->payment_method }}</td>
+                        <td>{{ $employee->created_at->format('M d, Y') }}</td>
                     </tr>
                 @endforeach
             </tbody>

@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\StoreEmployee;
 
 class EmployeeController extends Controller
 {
-    use SoftDeletes;
+    /**
+     * EmployeeController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('can:edit employees')->except(['index', 'show']);
+    }
 
     /**
      * Display a listing of the resource.
@@ -22,14 +26,12 @@ class EmployeeController extends Controller
     {
         $employees = Employee::name(request('name'))
             ->email(request('email'))
-            ->phone(request('phone'))
-            ->gender(request('gender'))
-            ->birthDate(request('birth_date'))
+            ->classification(request('classification'))
+            ->paymentMethod(request('payment_method'))
+            ->orderBy('last_name', 'ASC')
             ->paginate(request('results_per_page', Employee::RESULTS_PER_PAGE));
 
-        return view('employees.index', compact([
-            'employees',
-        ]));
+        return view('employees.index', compact('employees'));
     }
 
     /**
@@ -63,9 +65,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        return view('employees.show', compact([
-            'employee',
-        ]));
+        return view('employees.show', compact('employee'));
     }
 
     /**
@@ -76,19 +76,17 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        return view('employees.edit', compact([
-            'employee'
-        ]));
+        return view('employees.edit', compact('employee'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param StoreEmployee $request
      * @param Employee $employee
      * @return RedirectResponse
      */
-    public function update(Request $request, Employee $employee)
+    public function update(StoreEmployee $request, Employee $employee)
     {
         $employee->update($request->all());
 

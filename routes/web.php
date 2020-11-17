@@ -21,10 +21,8 @@ Route::middleware('auth')->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
 
     // Employees
-    Route::get('/employees', 'EmployeeController@index');
-    Route::get('/employees/create', 'EmployeeController@create');
-    Route::get('/employees/{employee}', 'EmployeeController@show');
-    Route::post('/employees', 'EmployeeController@store');
+    Route::resource('employees', 'EmployeeController');
 
-
+    // Employee Notes
+    Route::resource('employee-notes', 'EmployeeNoteController')->only('store', 'update', 'destroy');
 });
