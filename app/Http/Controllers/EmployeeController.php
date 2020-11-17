@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\StoreEmployee;
 
@@ -27,9 +26,8 @@ class EmployeeController extends Controller
     {
         $employees = Employee::name(request('name'))
             ->email(request('email'))
-            ->phone(request('phone'))
-            ->gender(request('gender'))
-            ->birthDate(request('birth_date'))
+            ->classification(request('classification'))
+            ->paymentMethod(request('payment_method'))
             ->orderBy('last_name', 'ASC')
             ->paginate(request('results_per_page', Employee::RESULTS_PER_PAGE));
 

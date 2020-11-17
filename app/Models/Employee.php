@@ -161,31 +161,23 @@ class Employee extends Model
 
     /**
      * @param Builder $query
-     * @param string|null $phone
+     * @param string|null $classification
      * @return Builder
      */
-    public function scopePhone(Builder $query, $phone) : Builder
+    public function scopeClassification(Builder $query, $classification) : Builder
     {
-        if (is_null($phone)) return $query;
-        return $query->where('phone', 'LIKE', '%' . $phone . '%');
+        if (is_null($classification)) return $query;
+        return $query->where('classification', $classification);
     }
 
     /**
      * @param Builder $query
-     * @param string|null $gender
+     * @param string|null $paymentMethod
      * @return Builder
      */
-    public function scopeGender(Builder $query, $gender) : Builder
+    public function scopePaymentMethod(Builder $query, $paymentMethod) : Builder
     {
-        if (is_null($gender)) return $query;
-        return $query->where('gender', $gender);
-    }
-
-    public function scopeBirthDate(Builder $query, $birthDate) : Builder
-    {
-        if (is_null($birthDate)) return $query;
-
-        $formattedBirthDate = Carbon::createFromFormat('m/d/Y', $birthDate);
-        return $query->whereDate('birth_date', $formattedBirthDate);
+        if (is_null($paymentMethod)) return $query;
+        return $query->where('payment_method', $paymentMethod);
     }
 }
