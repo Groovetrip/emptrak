@@ -13,7 +13,7 @@ class EmployeesExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return Employee::withTrashed()->get();
+        return Employee::withTrashed()->orderBy('last_name', 'ASC')->get();
     }
 
     /**
@@ -45,7 +45,7 @@ class EmployeesExport implements FromCollection, WithHeadings
             'birth_date',
             'created_at',
             'updated_at',
-            'deleted_at',
+            'archived_at',
         ];
     }
 }
