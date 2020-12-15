@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EmployeesExport;
 use App\Models\Employee;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Http\Requests\StoreEmployee;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class EmployeeController extends Controller
 {
@@ -102,6 +105,15 @@ class EmployeeController extends Controller
     {
         $employee->delete();
 
-        return back();
+        return redirect('/employees');
+    }
+
+    /**
+     * Returns export of employees table
+     * @return BinaryFileResponse
+     */
+    public function exportAll()
+    {
+        return Excel::download(new EmployeesExport, 'employees.csv');
     }
 }

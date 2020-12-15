@@ -62,6 +62,9 @@
                     @can('edit employees')
                     <a href="/employees/create" role="button" class="btn btn-primary">Create</a>
                     @endcan
+                    @can('export employees')
+                    <a href="/export-employees" role="button" class="btn btn-primary ml-3">Export All</a>
+                    @endcan
                 </div>
             </div>
 

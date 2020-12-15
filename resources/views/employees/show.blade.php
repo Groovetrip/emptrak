@@ -8,7 +8,7 @@
                 <div>
                     Employee Details
                 </div>
-                <div>
+                <div class="d-flex justify-content-end">
                     @can('edit employees')
                         <a
                             href="/employees/{{ $employee->id }}/edit"
@@ -17,6 +17,11 @@
                         >
                             Edit
                         </a>
+                        <form action="/employees/{{ $employee->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger ml-4">Delete</button>
+                        </form>
                     @endcan
                 </div>
             </div>

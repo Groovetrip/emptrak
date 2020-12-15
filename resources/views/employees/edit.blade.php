@@ -86,7 +86,7 @@
                                 type="text"
                                 name="birth_date"
                                 class="form-control @error('birth_date') is-invalid @enderror"
-                                value="{{ $employee->birth_date->format('m/d/Y') }}"
+                                value="{{ $employee->birth_date ? $employee->birth_date->format('m/d/Y') : '' }}"
                                 placeholder="mm/dd/yyyy"
                             />
                             @error('birth_date')

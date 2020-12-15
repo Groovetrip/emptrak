@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function() {
 
     // Employees
     Route::resource('employees', 'EmployeeController');
+    Route::get('/export-employees', 'EmployeeController@exportAll');
 
     // Employee Notes
     Route::resource('employee-notes', 'EmployeeNoteController')->only('store', 'update', 'destroy');
