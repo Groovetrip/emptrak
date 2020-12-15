@@ -26,4 +26,8 @@ Route::middleware('auth')->group(function() {
 
     // Employee Notes
     Route::resource('employee-notes', 'EmployeeNoteController')->only('store', 'update', 'destroy');
+
+    Route::get('/home', function() {
+        return redirect('/');
+    });
 });
