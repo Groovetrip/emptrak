@@ -14,16 +14,28 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
-                    
+                    {{ __('You are logged in with account authority: ') }}
+
+                    <font color="#a00000">
+                    @hasrole('Super Admin')
+                    Super Admin
+                    @endhasrole
+                    @hasrole('Reporter')
+                    Reporter
+                    @endhasrole
+                    @hasrole('Accountant')
+                    Accountant
+                    @endhasrole
+                    </font>
+
                     @hasanyrole('Super Admin|Admin|Accountant')
                     <hr>
                     <form action="/employees" method="GET">
                         <div class="search-row mb-2">
                             <input
                                 type="text"
-                                name="name"
-                                value="{{ request('name') }}"
+                                name="general_search"
+                                value="{{ request('general_search') }}"
                                 placeholder="Search Employees"
                                 class="form-control"
                                 width="350"
