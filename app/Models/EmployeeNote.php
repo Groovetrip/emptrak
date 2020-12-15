@@ -23,11 +23,7 @@ class EmployeeNote extends Model
     protected $table = 'employee_notes';
 
     /** @var string[]  */
-    protected $fillabe = [
-        'agent_id',
-        'employee_id',
-        'note',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * @return BelongsTo
@@ -40,8 +36,8 @@ class EmployeeNote extends Model
     /**
      * @return BelongsTo
      */
-    public function user() : BelongsTo
+    public function agent() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'agent_id');
     }
 }

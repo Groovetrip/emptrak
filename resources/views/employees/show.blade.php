@@ -54,6 +54,30 @@
                     </button>
                 </div>
             </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    @foreach($employee->notes as $note)
+                        <tr>
+                            <td class="align-middle text-left">
+                                {{ $note->agent->name }}
+                            </td>
+                            <td class="align-middle text-left">
+                                {{ $note->note }}
+                            </td>
+                            <td class="align-middle text-left">
+                                {{ $note->created_at->format('M d, Y') }}
+                            </td>
+                            <td class="align-middle text-right">
+                                <form action="/employee-notes/{{ $note->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
     </div>
 

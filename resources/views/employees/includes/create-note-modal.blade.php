@@ -4,6 +4,7 @@
             <form action="/employee-notes" method="POST">
                 @csrf
                 @method('POST')
+                <input type="hidden" name="employee_id" value="{{ $employee->id }}"/>
                 <div class="modal-header">
                     <h5 class="modal-title" id="create-note-modal-label">New note</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -11,10 +12,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
                         <div class="form-group">
                             <label for="note-input">{{ $employee->full_name }}</label>
-                            <textarea class="form-control" id="note-input" rows="5"></textarea>
+                            <textarea name="note" class="form-control" id="note-input" rows="5"></textarea>
                         </div>
                 </div>
                 <div class="modal-footer">

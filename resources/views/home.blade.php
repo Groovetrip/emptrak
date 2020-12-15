@@ -19,13 +19,13 @@
 
                         <span style="color: #a00000">
                             @hasrole('Super Admin')
-                            Super Admin
+                                Super Admin
                             @endhasrole
                             @hasrole('Reporter')
-                            Reporter
+                                Reporter
                             @endhasrole
                             @hasrole('Accountant')
-                            Accountant
+                                Accountant
                             @endhasrole
                         </span>
                     </p>
