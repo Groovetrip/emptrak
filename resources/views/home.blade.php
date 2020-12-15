@@ -14,19 +14,21 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in with account authority: ') }}
+                    <p>
+                        {{ __('You are logged in with account authority: ') }}
 
-                    <font color="#a00000">
-                    @hasrole('Super Admin')
-                    Super Admin
-                    @endhasrole
-                    @hasrole('Reporter')
-                    Reporter
-                    @endhasrole
-                    @hasrole('Accountant')
-                    Accountant
-                    @endhasrole
-                    </font>
+                        <span style="color: #a00000">
+                            @hasrole('Super Admin')
+                            Super Admin
+                            @endhasrole
+                            @hasrole('Reporter')
+                            Reporter
+                            @endhasrole
+                            @hasrole('Accountant')
+                            Accountant
+                            @endhasrole
+                        </span>
+                    </p>
 
                     @hasanyrole('Super Admin|Admin|Accountant')
                     <hr>
@@ -36,7 +38,7 @@
                                 type="text"
                                 name="name"
                                 value="{{ request('name') }}"
-                                placeholder="Search Employees"
+                                placeholder="Search Employee Name"
                                 class="form-control"
                                 width="350"
                             />
