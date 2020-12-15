@@ -15,9 +15,8 @@ class RolesAndPermissionsSeeder extends Seeder
     public function run()
     {
         $superAdminRole = Role::create(['name' => 'Super Admin']);
-        Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Accountant']);
-        Role::create(['name' => 'User']);
+        Role::create(['name' => 'Reporter'])->givePermissionTo(Permission::create(['name' => 'export employees']));
+        Role::create(['name' => 'Accountant'])->givePermissionTo(Permission::create(['name' => 'view payments']));
 
         Permission::create(['name' => 'edit employees']);
 

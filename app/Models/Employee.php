@@ -135,6 +135,15 @@ class Employee extends Model
     }
 
     /**
+     * Get Employee's full address details
+     * @return string
+     */
+    public function getFullAddressAttribute(): string
+    {
+        return "$this->address" . ($this->address2 ? ' #' . $this->address2 : '') . ", $this->city $this->state, $this->zip";
+    }
+
+    /**
      * @param Builder $query
      * @param string|null $name
      * @return Builder

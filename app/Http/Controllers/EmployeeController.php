@@ -53,19 +53,18 @@ class EmployeeController extends Controller
     public function store(StoreEmployee $request)
     {
         $employee = Employee::create($request->all());
-
-        return redirect('/employees');
-//        return redirect("/employees/$employee->id");
+        return redirect("/employees/$employee->id");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Employee $employee
+     * @param $employeeId
      * @return View
      */
-    public function show(Employee $employee)
+    public function show($employeeId)
     {
+        $employee = Employee::with('notes')->findOrFail($employeeId);
         return view('employees.show', compact('employee'));
     }
 
@@ -90,8 +89,7 @@ class EmployeeController extends Controller
     public function update(StoreEmployee $request, Employee $employee)
     {
         $employee->update($request->all());
-
-        return back();
+        return redirect("/employees/$employee->id");
     }
 
     /**
