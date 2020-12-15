@@ -15,6 +15,25 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    
+                    @hasanyrole('Super Admin|Admin|Accountant')
+                    <hr>
+                    <form action="/employees" method="GET">
+                        <div class="search-row mb-2">
+                            <input
+                                type="text"
+                                name="name"
+                                value="{{ request('name') }}"
+                                placeholder="Search Employees"
+                                class="form-control"
+                                width="350"
+                            />
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                            <button type="submit" class="btn btn-primary mr-3">Search</button>
+                        </div>
+                    </form>
+                    @endhasanyrole
                 </div>
             </div>
         </div>
