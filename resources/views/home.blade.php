@@ -34,8 +34,8 @@
                         <div class="search-row mb-2">
                             <input
                                 type="text"
-                                name="general_search"
-                                value="{{ request('general_search') }}"
+                                name="name"
+                                value="{{ request('name') }}"
                                 placeholder="Search Employees"
                                 class="form-control"
                                 width="350"
