@@ -14,8 +14,20 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
-                    
+                    {{ __('You are logged in with account authority: ') }}
+
+                    <font color="#a00000">
+                    @hasrole('Super Admin')
+                    Super Admin
+                    @endhasrole
+                    @hasrole('Reporter')
+                    Reporter
+                    @endhasrole
+                    @hasrole('Accountant')
+                    Accountant
+                    @endhasrole
+                    </font>
+
                     @hasanyrole('Super Admin|Admin|Accountant')
                     <hr>
                     <form action="/employees" method="GET">
