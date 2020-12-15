@@ -17,8 +17,8 @@ class EmployeeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('can:edit employees')->except(['index', 'show']);
-        $this->middleware('can:export employees')->only('exportAll');
+        $this->middleware('can:edit employees')->only(['create', 'store', 'edit', 'update', 'destroy']);
+        $this->middleware('can:export employees')->only(['exportAll']);
     }
 
     /**
